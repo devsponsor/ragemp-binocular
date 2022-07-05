@@ -5,13 +5,13 @@
  * ----------------------------------------------------------------------------
 */
 
-let fov_max = 70.0
-let fov_min = 5.0 // max zoom level (smaller fov is more zoom)
-let zoomspeed = 10.0 // camera zoom speed
-let speed_lr = 8.0 // speed by which the camera pans left-right
-let speed_ud = 8.0 // speed by which the camera pans up-down
+let fov_max = 70.0;
+let fov_min = 5.0; // max zoom level (smaller fov is more zoom)
+let zoomspeed = 10.0; // camera zoom speed
+let speed_lr = 8.0; // speed by which the camera pans left-right
+let speed_ud = 8.0; // speed by which the camera pans up-down
 
-let binoculars = false
+let binoculars = false;
 let fov = (fov_max+fov_min)*0.5
 
 let cam = null;
@@ -41,15 +41,15 @@ var startBinocular = function() {
 
 			if (!cam) {
 				cam = mp.cameras.new("DEFAULT_SCRIPTED_FLY_CAMERA", lPed.position, new mp.Vector3(0, 0, 0), fov);
-				cam.attachTo(lPed.handle, 0.0,0.0,1.0, true)
+				cam.attachTo(lPed.handle, 0.0,0.0,1.0, true);
 				cam.setRot(fov);
 				mp.game.cam.renderScriptCams(true, false, 0, true, false);
 			}
-			let zoomvalue = (1.0/(fov_max-fov_min))*(fov-fov_min)
-			checkInputRotation(cam, zoomvalue)
+			let zoomvalue = (1.0/(fov_max-fov_min))*(fov-fov_min);
+			checkInputRotation(cam, zoomvalue);
 
-			handleZoom(cam)
-			hideHUD()
+			handleZoom(cam);
+			hideHUD();
 
 
 			myScaleForm.render2D();
@@ -75,12 +75,12 @@ var hideHUD = function () {
 
 
 var checkInputRotation = function(cam, zoomvalue) {
-	let rightAxisX = mp.game.controls.getDisabledControlNormal(0, 220)
-	let rightAxisY = mp.game.controls.getDisabledControlNormal(0, 221)
+	let rightAxisX = mp.game.controls.getDisabledControlNormal(0, 220);
+	let rightAxisY = mp.game.controls.getDisabledControlNormal(0, 221);
 	let rotation = cam.getRot(2);
 	if (rightAxisX != 0.0 || rightAxisY != 0.0) {
-		new_z = rotation.z + rightAxisX*-1.0*(speed_ud)*(zoomvalue+0.1)
-		new_x = Math.max(Math.min(20.0, rotation.x + rightAxisY*-1.0*(speed_lr)*(zoomvalue+0.1)), -89.5)
+		new_z = rotation.z + rightAxisX*-1.0*(speed_ud)*(zoomvalue+0.1);
+		new_x = Math.max(Math.min(20.0, rotation.x + rightAxisY*-1.0*(speed_lr)*(zoomvalue+0.1)), -89.5);
 		cam.setRot(new_x, 0.0, new_z, 2);
 	}
 }
@@ -91,25 +91,25 @@ var handleZoom = function(cam) {
 	if (!lPed.isSittingInAnyVehicle()) {
 
 		if (controls.isControlJustPressed(0, 241)) {
-			fov = Math.max(fov - zoomspeed, fov_min)
+			fov = Math.max(fov - zoomspeed, fov_min);
 		}
 
 		if (controls.isControlJustPressed(0, 242)) {
-			fov = Math.min(fov + zoomspeed, fov_max)
+			fov = Math.min(fov + zoomspeed, fov_max);
 		}
 
 		let current_fov = cam.getFov();
 		if (Math.abs(fov-current_fov) < 0.1) {
-			fov = current_fov
+			fov = current_fov;
 		}
 		cam.setFov(current_fov + (fov - current_fov)*0.05);
 	} else {
 		if (controls.isControlJustPressed(0, 17)) {
-			fov = Math.max(fov - zoomspeed, fov_min)
+			fov = Math.max(fov - zoomspeed, fov_min);
 		}
 
 		if (controls.isControlJustPressed(0, 16)) {
-			fov = Math.min(fov + zoomspeed, fov_max)
+			fov = Math.min(fov + zoomspeed, fov_max);
 		}
 
 		let current_fov = cam.getFov(cam);
