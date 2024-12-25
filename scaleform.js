@@ -1,7 +1,8 @@
 /*
  * ----------------------------------------------------------------------------
- * BY REVERBERATIONBTW
- * DISCORD - reverberation#9999
+ * Made by: https://github.com/devsponsor
+ * Discord - devsposnor
+ * Telegram - devsposnor
  * ----------------------------------------------------------------------------
 */
 
